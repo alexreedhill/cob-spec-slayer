@@ -19,6 +19,7 @@
   (GET "/parameters" {:body (param-decode-response request) :code 200})
   (GET "/redirect" (redirect "http://localhost:5000/"))
   (POST "/form" {:code 200})
+  (PUT "/form" {:code 200})
   (OPTIONS "/method_options" {:code 200})
   (four-oh-four "Sorry, there's nothing here!"))
 
