@@ -1,6 +1,7 @@
 (ns cob-spec-slayer.core
   (:require [lazy-server.server :as server]
             [lazy-server.router :refer :all]
+            [lazy-server.response-builder :refer [redirect]]
             [clojure.string :refer [join]])
   (:gen-class :main true))
 
@@ -16,6 +17,7 @@
 (defrouter cob-spec-router request
   (GET "/" {:body "" :code 200})
   (GET "/parameters" {:body (param-decode-response request) :code 200})
+  (GET "/redirect" (redirect "http://localhost:5000/"))
   (OPTIONS "/method_options" {:code 200})
   (four-oh-four "Sorry, there's nothing here!"))
 
