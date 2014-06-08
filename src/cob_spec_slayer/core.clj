@@ -6,13 +6,11 @@
   (:gen-class :main true))
 
 (defn param-decode-response [request]
-  (join \newline
-        [(str
-           (name (first (second (request :query-params)))) " = "
-           (second (second (request :query-params))))
-         (str
-           (name (first (first (request :query-params)))) " = "
-           (second (first (request :query-params))))]))
+  (str
+    (name (first (second (request :query-params)))) " = "
+    (second (second (request :query-params))) "\n"
+    (name (first (first (request :query-params)))) " = "
+    (second (first (request :query-params)))))
 
 (defrouter cob-spec-router request
   (GET "/" {:body "" :code 200})
