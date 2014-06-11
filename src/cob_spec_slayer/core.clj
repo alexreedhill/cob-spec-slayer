@@ -18,10 +18,14 @@
   (GET "/parameters" {:body (param-decode-response request) :code 200})
   (GET "/redirect" (redirect "http://localhost:5000/"))
   (GET "/file1" (serve-file {:path (as-relative-path "public/file1.txt")}))
+  (GET "/text-file.txt" (serve-file {:path (as-relative-path "public/text-file.txt")}))
+  (GET "/image.jpeg" (serve-file {:path (as-relative-path "public/image.jpeg")}))
+  (GET "/image.png" (serve-file {:path (as-relative-path "public/image.png")}))
+  (GET "/image.gif" (serve-file {:path (as-relative-path "public/image.gif")}))
   (POST "/form" {:code 200})
   (PUT "/form" {:code 200})
   (OPTIONS "/method_options" {:code 200})
-  (four-oh-four "Sorry, there's nothing here!"))
+  (not-found "Sorry, there's nothing here!"))
 
 (defn -main [& args]
   (server/-main "5000" "localhost" cob-spec-router))
