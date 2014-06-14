@@ -2,6 +2,7 @@
   (:require [lazy-server.server :as server]
             [lazy-server.router :refer :all]
             [lazy-server.response-builder :refer [redirect serve-file]]
+            [lazy-server.basic-authenticator :refer [basic-auth]]
             [clojure.string :refer [join]]
             [clojure.java.io :refer [as-relative-path]])
   (:gen-class :main true))
@@ -23,6 +24,7 @@
   (GET "/image.png" (serve-file request))
   (GET "/image.gif" (serve-file request))
   (GET "/partial_content.txt" (serve-file request))
+  (GET "/logs" (basic-auth request "Authentication required" (slurp "public/log.txt") "admin:hunter2"))
   (POST "/form" {:code 200})
   (PUT "/form" {:code 200})
   (OPTIONS "/method_options" {:code 200})
