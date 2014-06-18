@@ -16,7 +16,7 @@
 
 (defrouter cob-spec-router request
   (GET "/" {:body "" :code 200})
-  (GET "/parameters" {:body (param-decode-response request) :code 200})
+  (GET "/parameters" {:body (cob-spec-slayer.core/param-decode-response request) :code 200})
   (GET "/redirect" (redirect "http://localhost:5000/"))
   (GET "/file1" (serve-file request))
   (GET "/text-file.txt" (serve-file request))
