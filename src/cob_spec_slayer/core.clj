@@ -25,8 +25,9 @@
   (GET "/image.gif" (serve-file request))
   (GET "/partial_content.txt" (serve-file request))
   (GET "/logs" (basic-auth request "Authentication required" (slurp "public/log.txt") "admin:hunter2"))
-  (POST "/form" {:code 200})
-  (PUT "/form" {:code 200})
+  (GET "/form" (serve-file request))
+  (POST "/form" (save-resource request))
+  (PUT "/form" (save-resource request))
   (OPTIONS "/method_options" {:code 200})
   (not-found "Sorry, there's nothing here!"))
 
