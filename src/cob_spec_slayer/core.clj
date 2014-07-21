@@ -17,17 +17,17 @@
   {:code 200 :body (param-decode-body request)})
 
 (defn directory-body []
-  (->> (directory-contents public-dir)
+  (->> (directory-contents server/public-dir)
        (map #(str "<a href=\"/" % "\">" % "</a><br>\n"))
        (mapcat #(.getBytes %))
        (byte-array)))
 
-(defn directory-response
+(defn directory-response []
   {:code 200 :body (directory-body)})
 
 (defrouter cob-spec-router request
   (GET "/" (cob-spec-slayer.core/directory-response))
-  (GET "/parameters" (cob-spec-slayer.core/param-decode-response request) :code 200)
+  (GET "/parameters" (cob-spec-slayer.core/param-decode-response request))
   (GET "/redirect" (redirect "http://localhost:5000/"))
   (GET "/logs" (authenticate request "Authentication required" (slurp "public/log.txt") "admin:hunter2"))
   (POST "/form" (save-resource request))
